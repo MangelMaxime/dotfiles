@@ -30,6 +30,8 @@ brew "fnm"
 cask "font-fira-code-nerd-font"
 cask "font-jetbrains-mono-nerd-font"
 cask "iterm2"
+brew "pyenv"
+brew "poetry"
 
 # CLI
 brew "stow"

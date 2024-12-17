@@ -114,3 +114,5 @@ else
     echo "No ~/.personal.zsh file found, create one to add personal configurations"
     echo "Example: touch ~/.personal.zsh"
 fi
+
+source ~/dotfiles/zsh/pyenv.zsh
