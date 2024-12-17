@@ -13,13 +13,13 @@ cask "emclient"
 cask "fantastical"
 cask "microsoft-office"
 
+tap "nikitabobko/homebrew-tap"
+cask "aerospace"
+
 # Socials
 cask "slack"
 cask "discord"
 cask "microsoft-teams"
-
-tap "nikitabobko/homebrew-tap"
-cask "aerospace"
 
 # Development
 cask "gitkraken"
@@ -27,9 +27,13 @@ brew "gh"
 cask "visual-studio-code"
 brew "act"
 brew "fnm"
+cask "font-fira-code-nerd-font"
+cask "font-jetbrains-mono-nerd-font"
+cask "iterm2"
 
 # CLI
 brew "stow"
 brew "neovim"
 brew "fzf"
 brew "tmux"
+brew "tree"
