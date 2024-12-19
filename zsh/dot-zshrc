@@ -116,3 +116,4 @@ else
 fi
 
 source ~/dotfiles/zsh/pyenv.zsh
+source ~/dotfiles/zsh/dotnet.zsh
