@@ -32,6 +32,7 @@ cask "font-jetbrains-mono-nerd-font"
 cask "iterm2"
 brew "pyenv"
 brew "poetry"
+brew "rust"
 
 # CLI
 brew "stow"
