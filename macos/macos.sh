@@ -127,3 +127,8 @@ echo "Done. Note that some of these changes require a logout/restart to take eff
 echo "For iTerm2, you need to manually
 	- Import rose-pine themes from iterm2/colors folder
 	- Set the font to JetBrainsMonoNF-Regular 16"
+
+echo "Linking LanchAgents"
+
+ln -sf ~/dotfiles/LaunchAgents/mmangel.CapslockBackspace.plist ~/Library/LaunchAgents/mmangel.CapslockBackspace.plist
+ln -sf ~/dotfiles/LaunchAgents/mmangel.noTunes.plist ~/Library/LaunchAgents/mmangel.noTunes.plist
