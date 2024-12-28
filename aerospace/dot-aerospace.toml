@@ -254,3 +254,11 @@ run = 'move-node-to-workspace G'
 [[on-window-detected]]
 if.app-id = 'com.apple.Safari.WebApp.A2F48F77-6214-48BA-8D77-267A25D5FE8B'
 run = 'move-node-to-workspace 9'
+
+# Terminal applications goes to workspace T
+[[on-window-detected]]
+if.app-id = 'com.googlecode.iterm2'
+run = 'move-node-to-workspace T'
+[[on-window-detected]]
+if.app-id = 'com.mitchellh.ghostty'
+run = 'move-node-to-workspace T'

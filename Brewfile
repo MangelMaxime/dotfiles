@@ -8,7 +8,7 @@ cask "notunes"
 # Applications
 cask "kdrive"
 cask "arc"
-cask "protonmail-bridge"
+cask "proton-mail-bridge"
 cask "emclient"
 cask "fantastical"
 cask "microsoft-office"
@@ -33,6 +33,7 @@ cask "iterm2"
 brew "pyenv"
 brew "poetry"
 brew "rust"
+cask "ghostty"
 
 # CLI
 brew "stow"

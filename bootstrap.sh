@@ -78,6 +78,8 @@ stowFolder() {
 
 stowFolder zsh
 stowFolder aerospace
+# Don't use stowFolder because we don't want to delete the existing .config folder
+stow config --dotfiles
 
 # Remap Capslock to Esc
 # hidutil property --set '{"UserKeyMapping":[{"HIDKeyboardModifierMappingSrc":0x700000039,"HIDKeyboardModifierMappingDst":0x700000029}]}'
@@ -85,6 +87,8 @@ stowFolder aerospace
 # Generate auto-completion
 info "Generating auto-completion for gh..."
 # gh completion -s zsh >/usr/local/share/zsh/site-functions/_gh
+
+. macos/setup.sh
 
 info "Removing custom scripts..."
 . scripts/cleanup-functions.sh
