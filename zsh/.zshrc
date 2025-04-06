@@ -55,10 +55,15 @@ bindkey "^[[1;5C" forward-word
 # Ctrl + Left - Move cursor backward by word
 bindkey "^[[1;5D" backward-word
 # Search history based on current input
-bindkey "^[OA" history-search-backward  # Ctrl + Up
-bindkey "^[OB" history-search-forward   # Ctrl + Down
+bindkey "^[[A" history-search-backward  # Up
+bindkey "^[[B" history-search-forward   # Down
 bindkey "^p" history-search-backward    # Ctrl + p
 bindkey "^n" history-search-forward     # Ctrl + n
+bindkey '^w' backward-kill-word
+# Move cursor to the beginning of the line
+bindkey '^[[H' beginning-of-line        # Home
+# Move cursor to the end of the line
+bindkey '^[[F' end-of-line              # End
 
 # History
 HISTSIZE=5000
@@ -101,7 +106,7 @@ alias vim='nvim'
 alias lg='lazygit'
 
 # Set up Homebrew
-eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
 eval "$(starship init zsh)"
 
@@ -112,11 +117,11 @@ eval "$(fnm env --use-on-cd --shell zsh)"
 
 # Should be moved to a separate script to not impact the zsh startup time
 # Install Homebrew if not installed
-if ! command -v brew &> /dev/null
-then
-    echo "Homebrew not found, installing..."
-    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-fi
+# if ! command -v brew &> /dev/null
+# then
+#     echo "Homebrew not found, installing..."
+#     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+# fi
 
 
 # Make dotnet-install.sh available in the PATH
@@ -130,20 +135,6 @@ if [ ! -d $DOTNET_INSTALL_SCRIPT_DIR ]; then
 
     echo "Linking dotnet-install.sh to /usr/local/bin/dotnet-install"
     sudo ln -s $DOTNET_INSTALL_SCRIPT_DIR/dotnet-install.sh /usr/local/bin/dotnet-install
-fi
-
-# Install green-clip - https://github.com/erebe/greenclip
-GREEN_CLIP_DIR="$HOME/Tools/greenclip"
-if [ ! -d $GREEN_CLIP_DIR ]; then
-    mkdir -p $GREEN_CLIP_DIR
-
-    wget https://github.com/erebe/greenclip/releases/download/v4.2/greenclip-v4.2 \
-        -O $GREEN_CLIP_DIR/greenclipv4.2
-    chmod +x $GREEN_CLIP_DIR/greenclipv4.2
-
-    echo "Linking greenclip to /usr/local/bin/greenclip"
-    sudo ln -s $GREEN_CLIP_DIR/greenclipv4.2 /usr/local/bin/greenclip
-
 fi
 
 # Pyenv
@@ -166,7 +157,7 @@ zinit snippet OMZP::gh
 zinit snippet OMZP::fnm
 zinit snippet OMZP::pyenv
 zinit snippet OMZP::poetry
-zinit snippet OMZP::brew
+# zinit snippet OMZP::brew
 
 # Should be at the end of the file
 zinit cdreplay -q
