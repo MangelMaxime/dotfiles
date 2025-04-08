@@ -55,12 +55,12 @@ bindkey "^[[1;5C" forward-word
 # Ctrl + Left - Move cursor backward by word
 bindkey "^[[1;5D" backward-word
 # Search history based on current input
-bindkey "^[[A" history-search-backward  # Up
-bindkey "^[OA" history-search-backward  # Up
-bindkey "^[[B" history-search-forward   # Down
-bindkey "^[OB" history-search-forward   # Down
-bindkey "^p" history-search-backward    # Ctrl + p
-bindkey "^n" history-search-forward     # Ctrl + n
+bindkey "^[[A" history-beginning-search-backward  # Up
+bindkey "^[OA" history-beginning-search-backward  # Up
+bindkey "^[[B" history-beginning-search-forward   # Down
+bindkey "^[OB" history-beginning-search-forward   # Down
+bindkey "^p" history-beginning-search-backward    # Ctrl + p
+bindkey "^n" history-beginning-search-forward     # Ctrl + n
 bindkey '^w' backward-kill-word
 # Move cursor to the beginning of the line
 bindkey '^[[H' beginning-of-line        # Home
@@ -107,19 +107,6 @@ alias la='ls -a'
 alias vim='nvim'
 alias lg='lazygit'
 
-# Set up Homebrew
-# eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
-
-
-# Should be moved to a separate script to not impact the zsh startup time
-# Install Homebrew if not installed
-# if ! command -v brew &> /dev/null
-# then
-#     echo "Homebrew not found, installing..."
-#     /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# fi
-
-
 # Make dotnet-install.sh available in the PATH
 DOTNET_INSTALL_SCRIPT_DIR="$HOME/Tools/dotnet-install"
 if [ ! -d $DOTNET_INSTALL_SCRIPT_DIR ]; then
@@ -137,6 +124,7 @@ fi
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
+eval "$(pyenv virtualenv-init -)"
 
 # Dotnet
 export DOTNET_ROOT=$HOME/.dotnet
@@ -146,8 +134,12 @@ export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 export PATH="$PATH:/home/mmangel/.local/bin"
 # Add user bin directory to PATH
 export PATH="$PATH:$HOME/.local/bin"
+# Make nvim available
+# Installed using https://github.com/neovim/neovim/blob/master/INSTALL.md#pre-built-archives-2
+export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 export EDITOR=nvim
+export FORCE_WEBSHARPERSTANDALONE=true
 
 # Install fzf via Git - https://github.com/junegunn/fzf#using-git
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
@@ -166,12 +158,17 @@ eval "$(zoxide init --cmd cd zsh)"
 eval "$(fnm env --use-on-cd --shell zsh)"
 . "$HOME/.cargo/env"
 
+# ~/.zshrc
+export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
+zstyle ':completion:*' format $'\e[2;37mCompleting %d\e[m'
+source <(carapace _carapace)
+
 # More plugins relying on Homebrew installed packages
 # We need Homebrew to be configured, and also other installed tools like pyenv, etc.
-zinit snippet OMZP::gh
-zinit snippet OMZP::fnm
-zinit snippet OMZP::pyenv
-zinit snippet OMZP::poetry
+# zinit snippet OMZP::gh
+# zinit snippet OMZP::fnm
+# zinit snippet OMZP::pyenv
+# zinit snippet OMZP::poetry
 # zinit snippet OMZP::brew
 
 # Should be at the end of the file
