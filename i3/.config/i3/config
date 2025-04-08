@@ -13,7 +13,11 @@ set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
-font pango:monospace 8
+font pango:JetBrainsMono Nerd Font 10
+
+# Add a small inner gap, in order to make it easier to spot the focused window.
+# gaps inner 10
+# smart_gaps on
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
@@ -34,14 +38,20 @@ exec --no-startup-id xss-lock --transfer-sleep-lock -- i3lock --nofork
 # and nm-applet is a desktop environment-independent system tray GUI for it.
 exec --no-startup-id nm-applet
 
-# Use pactl to adjust volume in PulseAudio.
-set $refresh_i3status killall -SIGUSR1 i3status
-bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
-bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
-bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
-bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
-bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
-
+#
+# Utilities:
+#
+    # Use pactl to adjust volume in PulseAudio.
+    set $refresh_i3status killall -SIGUSR1 i3status
+    bindsym XF86AudioRaiseVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ +5% && $refresh_i3status
+    bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT_SINK@ -5% && $refresh_i3status
+    bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
+    bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
+    bindsym XF86AudioPlay exec --no-startup-id playerctl play-pause
+    # Take a screenshot with flameshot
+    bindsym --release Mod1+Shift+2 exec flameshot gui
+    # Open file manager
+    bindsym $mod+e exec thunar
 # Use Mouse+$mod to drag floating windows to their wanted position
 floating_modifier $mod
 
@@ -54,7 +64,7 @@ bindsym $mod+c kill
 # start dmenu (a program launcher)
 #bindsym $mod+d exec --no-startup-id dmenu_run
 # A more modern dmenu replacement is rofi:
-bindsym $mod+d exec "rofi -modi drun,run -show drun"
+bindsym $mod+d exec "rofi -modi drun,run -show drun -show-icons"
 # There also is i3-dmenu-desktop which only displays applications shipping a
 # .desktop file. It is a wrapper around dmenu, so you need that installed.
 # bindcode $mod+40 exec --no-startup-id i3-dmenu-desktop
@@ -89,22 +99,44 @@ bindsym $mod+Shift+Right move right
 # split in vertical orientation
 # bindsym $mod+dead_acute split v
 
-# enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+#
+# Layout stuff:
+#
+    # You can "split" the current object of your focus with
+    # $mod+b or $mod+v, for horizontal and vertical splits
+    # respectively.
+    # bindsym $mod+comma splith
+    # bindsym $mod+period splitv
 
-# change container layout (stacked, tabbed, toggle split)
-bindsym $mod+shift+comma layout stacking
-bindsym $mod+shift+period layout tabbed
-bindsym $mod+shift+slash layout toggle split
+    # Switch the current container between different layout styles
+    bindsym $mod+semicolon layout stacking
+    bindsym $mod+dead_acute layout tabbed
+    bindsym $mod+apostrophe layout tabbed
+    bindsym $mod+slash layout toggle split
 
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
+    # Make the current focus fullscreen
+    bindsym $mod+f fullscreen
 
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
+    # Toggle the current focus between tiling and floating mode
+    bindsym $mod+Shift+space floating toggle
 
-# focus the parent container
-bindsym $mod+a focus parent
+    # Swap focus between the tiling area and the floating area
+    bindsym $mod+space focus mode_toggle
+
+    # Move focus to the parent container
+    bindsym $mod+a focus parent
+#
+# Scratchpad:
+#
+    # Sway has a "scratchpad", which is a bag of holding for windows.
+    # You can send windows there and get them back later.
+
+    # Move the currently focused window to the scratchpad
+    bindsym $mod+Shift+x move scratchpad
+
+    # Show the next scratchpad window or hide the focused scratchpad window.
+    # If there are multiple scratchpad windows, this command cycles through them.
+    bindsym $mod+x scratchpad show
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -121,6 +153,7 @@ set $ws7 "7"
 set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
+set $ws_g "g"
 set $ws_m "m"
 set $ws_s "s"
 set $ws_t "t"
@@ -136,6 +169,7 @@ bindsym $mod+7 workspace number $ws7
 bindsym $mod+8 workspace number $ws8
 bindsym $mod+9 workspace number $ws9
 bindsym $mod+0 workspace number $ws10
+bindsym $mod+g workspace $ws_g
 bindsym $mod+m workspace $ws_m
 bindsym $mod+s workspace $ws_s
 bindsym $mod+t workspace $ws_t
@@ -152,6 +186,7 @@ bindsym $mod+Shift+7 move container to workspace number $ws7
 bindsym $mod+Shift+8 move container to workspace number $ws8
 bindsym $mod+Shift+9 move container to workspace number $ws9
 bindsym $mod+Shift+0 move container to workspace number $ws10
+bindsym $mod+Shift+g move container to workspace $ws_g
 bindsym $mod+Shift+m move container to workspace $ws_m
 bindsym $mod+Shift+s move container to workspace $ws_s
 bindsym $mod+Shift+t move container to workspace $ws_t
@@ -171,16 +206,16 @@ mode "resize" {
         # Pressing right will grow the window’s width.
         # Pressing up will shrink the window’s height.
         # Pressing down will grow the window’s height.
-        bindsym j resize shrink width 10 px or 10 ppt
-        bindsym k resize grow height 10 px or 10 ppt
-        bindsym l resize shrink height 10 px or 10 ppt
-        bindsym semicolon resize grow width 10 px or 10 ppt
+        bindsym j resize shrink width 10 px or 5 ppt
+        bindsym k resize grow height 10 px or 5 ppt
+        bindsym l resize shrink height 10 px or 5 ppt
+        bindsym semicolon resize grow width 10 px or 5 ppt
 
         # same bindings, but for the arrow keys
-        bindsym Left resize shrink width 10 px or 10 ppt
-        bindsym Down resize grow height 10 px or 10 ppt
-        bindsym Up resize shrink height 10 px or 10 ppt
-        bindsym Right resize grow width 10 px or 10 ppt
+        bindsym Left resize shrink width 10 px or 5 ppt
+        bindsym Down resize grow height 10 px or 5 ppt
+        bindsym Up resize shrink height 10 px or 5 ppt
+        bindsym Right resize grow width 10 px or 5 ppt
 
         # back to normal: Enter or Escape or $mod+r
         bindsym Return mode "default"
@@ -193,30 +228,38 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        status_command i3status
+    position top
+    status_command i3status
+    tray_output primary
+    tray_padding 3
+    workspace_min_width 30
 }
 
 # Remap capslock to escape
 exec_always --no-startup-id setxkbmap -option caps:escape
 
-# Clipboard manager
-exec --no-startup-id greenclip daemon
-bindsym $mod+v exec rofi -modi 'clipboard:greenclip print' -show clipboard -run-command '{cmd}'
-
 # Moving workspaces between screens
 bindsym $mod+p move workspace to output right
-
-bindsym $mod+e exec nautilus
 
 # Make it easy to copy the current URL from a browser
 # Conflict with Copy in terminal
 # bindsym --release Ctrl+Shift+c exec --no-startup-id xdotool key --clearmodifiers "Ctrl+l" "Ctrl+c"
 
-bindsym --release Mod1+Shift+2 exec flameshot gui
+#
+# Automatic workspace attribution
+#
+# Run this command to get info about your windows:
+# swaymsg -t get_tree
+    assign [class="Code"] 2
+    assign [class="discord"] s
+    assign [class="Slack"] s
+    # assign [app_id="thunderbird"] m
+    assign [class="morgen"] m
+    assign [class="steam"] g
 
 # Activate the second monitor and arrange monitor placement
 # exec xrandr --output DP-1-2 --mode 2560x1440 --rate 143.97 --primary --left-of DP-3
-exec xrandr --output DP-1-2 --mode 2560x1440 --rate 60 --primary --left-of DP-3
+exec_always sleep 500 && xrandr --output DP-2-2 --mode 2560x1440_ --rate 60 --primary --left-of DP-3
 
 # Emoji picker
-bindsym $mod+period exec rofi -modi "emoji:rofimoji" -show emoji
+bindsym $mod+period exec rofimoji

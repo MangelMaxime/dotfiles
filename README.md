@@ -13,5 +13,6 @@ sudo sysctl -p
 - [btop](https://github.com/aristocratos/btop)
 - [cliphist](https://github.com/sentriz/cliphist)
 - [getnf](https://github.com/getnf/getnf)
+- [rofimoji](https://github.com/fdw/rofimoji)
 - Thunderbird
 - Morgen
