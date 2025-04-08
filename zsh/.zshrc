@@ -56,7 +56,9 @@ bindkey "^[[1;5C" forward-word
 bindkey "^[[1;5D" backward-word
 # Search history based on current input
 bindkey "^[[A" history-search-backward  # Up
+bindkey "^[OA" history-search-backward  # Up
 bindkey "^[[B" history-search-forward   # Down
+bindkey "^[OB" history-search-forward   # Down
 bindkey "^p" history-search-backward    # Ctrl + p
 bindkey "^n" history-search-forward     # Ctrl + n
 bindkey '^w' backward-kill-word
@@ -108,12 +110,6 @@ alias lg='lazygit'
 # Set up Homebrew
 # eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
 
-eval "$(starship init zsh)"
-
-eval "$(fzf --zsh)"
-eval "$(zoxide init --cmd cd zsh)"
-eval "$(fnm env --use-on-cd --shell zsh)"
-
 
 # Should be moved to a separate script to not impact the zsh startup time
 # Install Homebrew if not installed
@@ -148,8 +144,27 @@ export PATH=$PATH:$DOTNET_ROOT:$DOTNET_ROOT/tools
 
 # Created by `pipx` on 2025-04-04 09:11:41
 export PATH="$PATH:/home/mmangel/.local/bin"
+# Add user bin directory to PATH
+export PATH="$PATH:$HOME/.local/bin"
 
 export EDITOR=nvim
+
+# Install fzf via Git - https://github.com/junegunn/fzf#using-git
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+
+# fnm
+FNM_PATH="/home/mmangel/.local/share/fnm"
+if [ -d "$FNM_PATH" ]; then
+  export PATH="/home/mmangel/.local/share/fnm:$PATH"
+  eval "`fnm env`"
+fi
+
+eval "$(starship init zsh)"
+
+eval "$(fzf --zsh)"
+eval "$(zoxide init --cmd cd zsh)"
+eval "$(fnm env --use-on-cd --shell zsh)"
+. "$HOME/.cargo/env"
 
 # More plugins relying on Homebrew installed packages
 # We need Homebrew to be configured, and also other installed tools like pyenv, etc.
