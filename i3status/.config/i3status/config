@@ -45,18 +45,18 @@ load {
 }
 
 memory {
-    format = "%used | %available  "
+    format = "%used - %available  "
     threshold_degraded = "1G"
     format_degraded = "MEMORY < %available"
 }
 
 tztime local {
     # format = "<span foreground='#f5c2e7' weight='bold'> </span> %d %B %Y %H:%M"
-    format = "  %d %B %Y %H:%M"
+    format = "%d %B %Y %H:%M  "
 }
 
 volume master {
-    format = "  %volume"
+    format = "%volume  "
     format_muted = " "
     device = "default"
     mixer = "Master"
