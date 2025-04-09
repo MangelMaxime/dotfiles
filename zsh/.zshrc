@@ -46,21 +46,30 @@ zinit snippet OMZL::directories.zsh
 # Keybindings #
 ###############
 
-# Use emacs keybindings
-bindkey -e
+# Use vim keybindings
+bindkey -v
 # Alt + v - Show key bindings (useful for debugging)
 bindkey '^[v' .describe-key-briefly
 # Ctrl + Right - Move cursor forward by word
 bindkey "^[[1;5C" forward-word
 # Ctrl + Left - Move cursor backward by word
 bindkey "^[[1;5D" backward-word
+
 # Search history based on current input
-bindkey "^[[A" history-beginning-search-backward  # Up
-bindkey "^[OA" history-beginning-search-backward  # Up
-bindkey "^[[B" history-beginning-search-forward   # Down
-bindkey "^[OB" history-beginning-search-forward   # Down
-bindkey "^p" history-beginning-search-backward    # Ctrl + p
-bindkey "^n" history-beginning-search-forward     # Ctrl + n
+autoload -U up-line-or-beginning-search
+zle -N up-line-or-beginning-search
+
+bindkey "^[[A" up-line-or-beginning-search      # Up
+bindkey "^[OA" up-line-or-beginning-search      # Up
+bindkey "^p" up-line-or-beginning-search        # Ctrl + p
+
+autoload -U down-line-or-beginning-search
+zle -N down-line-or-beginning-search
+
+bindkey "^[[B" down-line-or-beginning-search    # Down
+bindkey "^[OB" down-line-or-beginning-search    # Down
+bindkey "^n" down-line-or-beginning-search      # Ctrl + n
+
 bindkey '^w' backward-kill-word
 # Move cursor to the beginning of the line
 bindkey '^[[H' beginning-of-line        # Home
