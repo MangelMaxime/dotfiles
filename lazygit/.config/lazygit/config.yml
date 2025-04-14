@@ -1,0 +1,5 @@
+git:
+  paging:
+    colorArg: always
+    # pager: delta --diff-highlight --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
+    pager: delta --diff-so-fancy --dark --paging=never --line-numbers --hyperlinks --hyperlinks-file-link-format="lazygit-edit://{path}:{line}"
