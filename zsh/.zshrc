@@ -110,6 +110,16 @@ zstyle ':fzf-tab:complete:cd:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_z:*' fzf-preview 'ls --color $realpath'
 zstyle ':fzf-tab:complete:__zoxide_cd:*' fzf-preview 'ls --color $realpath'
 
+eval "$(/home/linuxbrew/.linuxbrew/bin/brew shellenv)"
+
+# Should be moved to a separate script to not impact the zsh startup time
+# Install Homebrew if not installed
+if ! command -v brew &> /dev/null
+then
+    echo "Homebrew not found, installing..."
+    /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
 # Aliases
 alias ls='ls --color'
 alias la='ls -a'
@@ -150,8 +160,13 @@ export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 export EDITOR=nvim
 export FORCE_WEBSHARPERSTANDALONE=true
 
-# Install fzf via Git - https://github.com/junegunn/fzf#using-git
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
+
+# Preview file content using bat (https://github.com/sharkdp/bat)
+export FZF_CTRL_T_OPTS="
+  --walker-skip .git,node_modules,target
+  --preview 'bat -n --color=always {}'
+  --bind 'ctrl-/:change-preview-window(down|hidden|)'"
 
 # fnm
 FNM_PATH="/home/mmangel/.local/share/fnm"
@@ -179,6 +194,12 @@ source <(carapace _carapace)
 # zinit snippet OMZP::pyenv
 # zinit snippet OMZP::poetry
 # zinit snippet OMZP::brew
+
+if [ -f "$HOME/.personal.zsh" ]; then
+    source $HOME/.personal.zsh
+else
+    echo "Missing $HOME/.personal.zsh"
+fi
 
 # Should be at the end of the file
 zinit cdreplay -q
