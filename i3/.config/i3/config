@@ -266,7 +266,7 @@ bindsym $mod+p move workspace to output right
 
 # Activate the second monitor and arrange monitor placement
 # exec xrandr --output DP-1-2 --mode 2560x1440 --rate 143.97 --primary --left-of DP-3
-exec_always sleep 500 && xrandr --output DP-2-2 --mode 2560x1440_ --rate 60 --primary --left-of DP-3
+exec_always sleep 500 && xrandr --output DP-2-2 --mode 2560x1440 --rate 60 --primary --left-of DP-3
 
 # Emoji picker
 bindsym $mod+period exec rofimoji
