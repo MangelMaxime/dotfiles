@@ -158,7 +158,6 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 export EDITOR=nvim
-export FORCE_WEBSHARPERSTANDALONE=true
 
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
@@ -203,3 +202,13 @@ fi
 
 # Should be at the end of the file
 zinit cdreplay -q
+
+export PATH="/home/mmangel/.dsm:$PATH"
+eval "`dsm env zsh`"
+
+# dsm
+if ! command -v dsm &> /dev/null
+then
+    echo "Dsm not found, installing..."
+    /bin/bash -c "$(curl -fsSL https://dsm-vm.vercel.app/install.sh | bash --skip-shell)"
+fi
