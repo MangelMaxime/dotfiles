@@ -239,10 +239,18 @@ bar {
     tray_output primary
     tray_padding 3
     workspace_min_width 30
+    # status_command i3status-rs
 }
 
 # Remap capslock to escape
 exec_always --no-startup-id setxkbmap -option caps:escape
+# Set keyboard layout variant
+exec_always --no-startup-id setxkbmap -layout us -variant intl
+exec --no-startup-id kDrive
+exec --no-startup-id copyq
+exec --no-startup-id protonmail-bridge
+exec --no-startup-id drata-agent
+exec --no-startup-id gromit-mpx
 
 # Moving workspaces between screens
 bindsym $mod+p move workspace to output right
@@ -258,15 +266,16 @@ bindsym $mod+p move workspace to output right
 # - xprop
 # - swaymsg -t get_tree
     assign [class="Code"] 2
+    assign [class="code-oss"] 2
     assign [class="discord"] s
     assign [class="Slack"] s
-    # assign [app_id="thunderbird"] m
+    assign [class="thunderbird"] m
     assign [class="morgen"] m
     assign [class="steam"] g
 
 # Activate the second monitor and arrange monitor placement
 # exec xrandr --output DP-1-2 --mode 2560x1440 --rate 143.97 --primary --left-of DP-3
-exec_always sleep 500 && xrandr --output DP-2-2 --mode 2560x1440 --rate 60 --primary --left-of DP-3
+# exec_always sleep 500 &&
 
 # Emoji picker
 bindsym $mod+period exec rofimoji

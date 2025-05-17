@@ -143,7 +143,7 @@ fi
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
 eval "$(pyenv init - zsh)"
-eval "$(pyenv virtualenv-init -)"
+# eval "$(pyenv virtualenv-init -)"
 
 # Dotnet
 export DOTNET_ROOT=$HOME/.dotnet
@@ -158,6 +158,7 @@ export PATH="$PATH:$HOME/.local/bin"
 export PATH="$PATH:/opt/nvim-linux-x86_64/bin"
 
 export EDITOR=nvim
+export TERMINAL=kitty
 
 export FZF_DEFAULT_COMMAND='fd --type f --strip-cwd-prefix --hidden --follow --exclude .git'
 
@@ -179,7 +180,7 @@ eval "$(starship init zsh)"
 eval "$(fzf --zsh)"
 eval "$(zoxide init --cmd cd zsh)"
 eval "$(fnm env --use-on-cd --shell zsh)"
-. "$HOME/.cargo/env"
+# . "$HOME/.cargo/env"
 
 # ~/.zshrc
 export CARAPACE_BRIDGES='zsh,fish,bash,inshellisense' # optional
@@ -203,12 +204,40 @@ fi
 # Should be at the end of the file
 zinit cdreplay -q
 
+# export PATH="/home/mmangel/.dsm:$PATH"
+# eval "`dsm env zsh`"
+
+# # dsm
+# if ! command -v dsm &> /dev/null
+# then
+#     echo "Dsm not found, installing..."
+#     /bin/bash -c "$(curl -fsSL https://dsm-vm.vercel.app/install.sh | bash --skip-shell)"
+# fi
+
+# Copy and adapt this function in .personal.zsh
+# Make it easy to setup monitor after a restart
+# function monitor_setup () {
+#     xrandr --output DP-1-2 --mode 2560x1440 --rate 143.97 --primary --pos 0x0
+#     xrandr --output DP-3 --off
+#     xrandr --output DP-3 --mode 1920x1080 --rate 74.97 --pos 2560x0
+#     i3-msg focus output DP-1-2 > /dev/null
+# }
+
+function git_bare () {
+
+}
+
+# dsm
 export PATH="/home/mmangel/.dsm:$PATH"
 eval "`dsm env zsh`"
 
-# dsm
-if ! command -v dsm &> /dev/null
-then
-    echo "Dsm not found, installing..."
-    /bin/bash -c "$(curl -fsSL https://dsm-vm.vercel.app/install.sh | bash --skip-shell)"
-fi
+### MANAGED BY RANCHER DESKTOP START (DO NOT EDIT)
+export PATH="/home/mmangel/.rd/bin:$PATH"
+### MANAGED BY RANCHER DESKTOP END (DO NOT EDIT)
+
+## [Completion]
+## Completion scripts setup. Remove the following line to uninstall
+[[ -f /home/mmangel/.dart-cli-completion/zsh-config.zsh ]] && . /home/mmangel/.dart-cli-completion/zsh-config.zsh || true
+## [/Completion]
+
+export PATH="/home/mmangel/dotfiles/zsh/scripts:$PATH"
