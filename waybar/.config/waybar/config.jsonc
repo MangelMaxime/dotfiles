@@ -22,36 +22,16 @@
     //     "hyprland/window"
     // ],
     "modules-right": [
-        // "mpd",
         "idle_inhibitor",
         "disk",
-        "pulseaudio",
-        // "network",
-        // "power-profiles-daemon",
         "cpu",
         "memory",
         "temperature",
-        // "backlight",
-        // "keyboard-state",
-        // "sway/language",
-        "battery",
+        "pulseaudio",
         "clock",
         "tray",
         "custom/notification"
-        // "custom/power"
     ],
-    // "hyprland/workspaces": {
-    //     "format": "{name}: {icon}",
-    //     "format-icons": {
-    //         "1": "",
-    //         "2": "",
-    //         "3": "",
-    //         "4": "",
-    //         "5": "",
-    //         "active": "",
-    //         "default": ""
-    //     }
-    // },
     "custom/notification": {
         "tooltip": false,
         // Uncomment for showing number
@@ -182,16 +162,7 @@
         "exec": "$HOME/.config/waybar/mediaplayer.py 2> /dev/null" // Script in resources folder
         // "exec": "$HOME/.config/waybar/mediaplayer.py --player spotify 2> /dev/null" // Filter player based on name
     },
-    "custom/power": {
-        "format": "⏻ ",
-        "tooltip": false,
-        "menu": "on-click",
-        "menu-file": "$HOME/.config/waybar/power_menu.xml", // Menu file in resources folder
-        "menu-actions": {
-            "shutdown": "shutdown",
-            "reboot": "reboot",
-            "suspend": "systemctl suspend",
-            "hibernate": "systemctl hibernate"
-        }
+    "disk": {
+        "format": "{free}  "
     }
 }
