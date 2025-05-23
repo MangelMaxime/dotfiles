@@ -17,5 +17,5 @@ contains_element() {
 if contains_element "$activeWindow" "${shiftPasteClasses[@]}"; then
     hyprctl dispatch sendshortcut "CTRL SHIFT,V,"
 else
-    hyprctl dispatch sendshortcut "CTRL,V"
+    hyprctl dispatch sendshortcut "CTRL,V,"
 fi
