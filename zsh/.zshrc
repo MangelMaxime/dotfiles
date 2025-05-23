@@ -259,4 +259,4 @@ export PATH="/home/mmangel/.rd/bin:$PATH"
 [[ -f /home/mmangel/.dart-cli-completion/zsh-config.zsh ]] && . /home/mmangel/.dart-cli-completion/zsh-config.zsh || true
 ## [/Completion]
 
-export PATH="/home/mmangel/dotfiles/zsh/scripts:$PATH"
+export PATH="/home/mmangel/dotfiles/scripts:$PATH"
