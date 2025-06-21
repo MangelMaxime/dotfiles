@@ -213,6 +213,7 @@ source <(carapace _carapace)
 # zinit snippet OMZP::pyenv
 # zinit snippet OMZP::poetry
 # zinit snippet OMZP::brew
+zinit snippet OMZP::volta
 
 if [ -f "$HOME/.personal.zsh" ]; then
     source $HOME/.personal.zsh
