@@ -46,6 +46,12 @@ git_repo_name=$(getRepoName "$1")
 
 destination="$workspaces_path/$git_provider/$git_org/$git_repo_name"
 
+# Check if the repository already exists
+if [ -d "$destination" ]; then
+  echo "Repository already exists at $destination"
+  exit 0
+fi
+
 # Ensure the destination directory exists
 mkdir -p "$destination"
 
