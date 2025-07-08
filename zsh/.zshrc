@@ -18,6 +18,7 @@ fi
 [[ -z ${fpath[(re)$ZSH_CACHE_DIR/completions]} ]] && fpath=( "$ZSH_CACHE_DIR/completions" "${fpath[@]}" )
 
 source "${ZINIT_HOME}/zinit.zsh"
+zinit ice depth=1
 
 # Load completion
 # IMPORTANT:
@@ -36,6 +37,7 @@ zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
+zinit light jeffreytse/zsh-vi-mode
 
 # Add snippets
 zinit snippet OMZP::command-not-found
@@ -158,6 +160,9 @@ _dotnet_zsh_complete()
 
 compdef _dotnet_zsh_complete dotnet
 
+# Use polling file watcher for .NET Core applications avoid issues with inotify limits on Linux
+# export DOTNET_USE_POLLING_FILE_WATCHER=1
+
 # Pyenv
 export PYENV_ROOT="$HOME/.pyenv"
 [[ -d $PYENV_ROOT/bin ]] && export PATH="$PYENV_ROOT/bin:$PATH"
@@ -243,10 +248,6 @@ zinit cdreplay -q
 #     i3-msg focus output DP-1-2 > /dev/null
 # }
 
-function git_bare () {
-
-}
-
 # dsm
 export PATH="/home/mmangel/.dsm:$PATH"
 eval "`dsm env zsh`"
@@ -261,3 +262,8 @@ export PATH="/home/mmangel/.rd/bin:$PATH"
 ## [/Completion]
 
 export PATH="/home/mmangel/dotfiles/scripts:$PATH"
+
+alias ls='eza -lh --group-directories-first --icons=auto'
+alias lsa='ls -a'
+alias lt='eza --tree --level=2 --long --icons --git'
+alias lta='lt -a'
