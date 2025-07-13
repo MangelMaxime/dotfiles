@@ -140,3 +140,18 @@ button:hover {
     padding-left: 6px;
     padding-right: 6px;
 }
+
+menu {
+    background-color: @surface0; /* dark background */
+    color: @text;            /* text color */
+    border: 1px solid @overlay0;
+    border-radius: 5px;
+}
+
+menu menuitem {
+    padding: 5px 10px;
+}
+
+menu menuitem:hover {
+    background-color: @overlay0;
+}
