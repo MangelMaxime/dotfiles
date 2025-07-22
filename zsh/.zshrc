@@ -37,7 +37,7 @@ zinit light Aloxaf/fzf-tab
 zinit light zsh-users/zsh-syntax-highlighting
 zinit light zsh-users/zsh-autosuggestions
 zinit light zsh-users/zsh-completions
-zinit light jeffreytse/zsh-vi-mode
+# zinit light jeffreytse/zsh-vi-mode
 
 # Add snippets
 zinit snippet OMZP::command-not-found
@@ -49,7 +49,7 @@ zinit snippet OMZL::directories.zsh
 ###############
 
 # Use vim keybindings
-bindkey -v
+# bindkey -v
 # Alt + v - Show key bindings (useful for debugging)
 bindkey '^[v' .describe-key-briefly
 # Ctrl + Right - Move cursor forward by word
@@ -268,4 +268,4 @@ alias lsa='ls -a'
 alias lt='eza --tree --level=2 --long --icons --git'
 alias lta='lt -a'
 
-alias motivity_watch='cd src/Motivity.Web.App && dotnet watch build --no-hot-reload'
+alias motivity_watch='cd src/Motivity.Web.App && dotnet watch build'
