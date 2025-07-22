@@ -25,7 +25,7 @@ else
             ;;
         esac
 
-        return $result
+        return
     }
 
     # git@github.com:whitetigle/vercel-mg-dalkia.git
@@ -50,15 +50,17 @@ else
     # Check if the repository already exists
     if [ -d "$destination" ]; then
     echo "Repository already exists at $destination"
-    exit 0
+    echo "Moving to the existing repository."
+    cd "$destination" || return 1
+    return 0
     fi
 
     # Ensure the destination directory exists
     mkdir -p "$destination"
 
-    cd "$destination"
+    cd "$destination" || exit
     git clone --bare "$1"
-    cd "$git_repo_name.git"
+    cd "$git_repo_name.git" || exit
 
     # Create a worktree for scratchpad (useful for testing PR or quickly testing changes)
     git worktree add ../scratchpad
